@@ -1,0 +1,7 @@
+WELCOME = "Привет, я FoodDiary — ваш дневник питания. Отправьте своё имя."
+ASK_WEIGHT = "Укажите ваш вес (в кг):"
+ASK_HEIGHT = "Укажите ваш рост (в см):"
+ASK_AGE = "Укажите ваш возраст:"
+ASK_ACTIVITY = "Укажите уровень активности (sedentary/light, moderate, active):"
+PROFILE_UPDATED = "Профиль обновлён."
+HELP = "Доступные команды: /start, /profile, /addmeal, /searchfood, /setgoal, /stats, /export, /reminders"

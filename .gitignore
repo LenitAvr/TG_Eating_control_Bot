@@ -1,0 +1,61 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Pydantic settings cache
+*.env
+.env.local
+.env.*.local
+
+# SQLite database (если используешь локально)
+*.sqlite
+*.db
+
+# Alembic
+db/migrations/*.pyc
+db/migrations/__pycache__/
+
+# Logs
+*.log
+logs/
+*.out
+*.err
+
+# VSCode
+.vscode/
+.history/
+
+# PyCharm
+.idea/
+*.iml
+
+# Docker
+docker-compose.override.yml
+*.tar
+*.log
+*.pid
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Test outputs
+htmlcov/
+.coverage
+.tox/
+pytest_cache/
+.pytest_cache/
+
+# Ignore compiled JS/CSS if you have a web UI
+dist/
+build/
+node_modules/
