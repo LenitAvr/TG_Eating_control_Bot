@@ -1,9 +1,8 @@
-aiogram==3.0.0b7
+aiogram==3.22.0
 SQLAlchemy==1.4.52
-asyncpg==0.27.0
-pydantic==1.10.7
+pydantic==2.11.0
 alembic==1.11.1
-aiohttp==3.8.4
+aiohttp==3.9.4
 python-dotenv==1.0.0
 pytest==7.4.0
 pytest-asyncio==0.21.0

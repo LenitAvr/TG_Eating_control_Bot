@@ -1,5 +1,6 @@
 from aiogram import Router
 from aiogram.types import Message
+from aiogram.filters import Command
 from db.models import AsyncSessionLocal
 from db import crud
 from services.calories import sum_items
@@ -8,7 +9,7 @@ import datetime
 
 router = Router()
 
-@router.message(commands=['stats'])
+@router.message(Command("stats"))
 async def cmd_stats(message: Message):
     parts = message.text.split()
     period = parts[1] if len(parts) > 1 else 'day'

@@ -2,6 +2,7 @@ from aiogram import Router
 from aiogram.types import Message
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
+from aiogram.filters import Command
 from db.models import AsyncSessionLocal
 from db import crud
 from bot.messages import *
@@ -15,7 +16,7 @@ class OnboardStates(StatesGroup):
     AGE = State()
     ACTIVITY = State()
 
-@router.message(commands=['start'])
+@router.message(Command("start"))
 async def cmd_start(message: Message, state: FSMContext):
     async with AsyncSessionLocal() as session:
         user = await crud.get_user_by_tg(session, message.from_user.id)

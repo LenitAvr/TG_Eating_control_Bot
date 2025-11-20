@@ -28,10 +28,13 @@ class User(Base):
     activity_level = sa.Column(sa.String, nullable=True)
     theme = sa.Column(sa.String, nullable=True)
     avatar = sa.Column(sa.String, nullable=True)
+    timezone = sa.Column(sa.String, nullable=True)  # IANA timezone name, e.g. Europe/Moscow
     created_at = sa.Column(sa.DateTime, default=now)
     updated_at = sa.Column(sa.DateTime, default=now, onupdate=now)
 
     meals = relationship('Meal', back_populates='user')
+    goals = relationship('Goal', back_populates='user', uselist=False)
+    reminders = relationship('Reminder', back_populates='user', cascade='all, delete-orphan')
 
 class Product(Base):
     __tablename__ = 'products'
@@ -71,3 +74,26 @@ class MealItem(Base):
 
     meal = relationship('Meal', back_populates='items')
     product = relationship('Product')
+
+class Goal(Base):
+    __tablename__ = 'goals'
+    id = sa.Column(sa.String, primary_key=True, default=gen_uuid)
+    user_id = sa.Column(sa.String, sa.ForeignKey('users.id'), nullable=False, unique=True)
+    kcal = sa.Column(sa.Float, nullable=True)
+    protein = sa.Column(sa.Float, nullable=True)
+    fat = sa.Column(sa.Float, nullable=True)
+    carbs = sa.Column(sa.Float, nullable=True)
+    updated_at = sa.Column(sa.DateTime, default=now, onupdate=now)
+
+    user = relationship('User', back_populates='goals')
+
+class Reminder(Base):
+    __tablename__ = 'reminders'
+    id = sa.Column(sa.String, primary_key=True, default=gen_uuid)
+    user_id = sa.Column(sa.String, sa.ForeignKey('users.id'), nullable=False, index=True)
+    times = sa.Column(sa.String, nullable=True)  # comma-separated HH:MM
+    enabled = sa.Column(sa.Boolean, default=True)
+    created_at = sa.Column(sa.DateTime, default=now)
+    updated_at = sa.Column(sa.DateTime, default=now, onupdate=now)
+
+    user = relationship('User', back_populates='reminders')

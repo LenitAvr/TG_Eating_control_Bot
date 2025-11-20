@@ -1,5 +1,6 @@
 from aiogram import Router
 from aiogram.types import Message
+from aiogram.filters import Command
 from core.config import settings
 from db.models import AsyncSessionLocal
 from db import crud
@@ -12,7 +13,7 @@ def is_admin(tg_id: int):
     ids = [int(x.strip()) for x in settings.ADMIN_TG_IDS.split(',') if x.strip()]
     return tg_id in ids
 
-@router.message(commands=['admin_add_product'])
+@router.message(Command("admin_add_product"))
 async def admin_add_product(message: Message):
     if not is_admin(message.from_user.id):
         await message.answer('Нет доступа.')

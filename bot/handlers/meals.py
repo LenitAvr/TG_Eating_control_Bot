@@ -2,6 +2,7 @@ from aiogram import Router
 from aiogram.types import Message
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
+from aiogram.filters import Command
 from db.models import AsyncSessionLocal
 from db import crud
 from services.calories import calc_item_by_product, sum_items
@@ -14,10 +15,10 @@ class AddMealStates(StatesGroup):
     TIMESTAMP = State()
     ADDING_ITEMS = State()
 
-@router.message(commands=['addmeal'])
+@router.message(Command("addmeal"))
 async def cmd_addmeal(message: Message, state: FSMContext):
     await state.set_state(AddMealStates.NAME)
-    await message.answer('Как назвать приём пищи? (например: Завтрак)')
+    await message.answer('Как назвать приём пищи? (пример: Завтрак)')
 
 @router.message(AddMealStates.NAME)
 async def meal_name(message: Message, state: FSMContext):
@@ -86,7 +87,7 @@ async def adding_items(message: Message, state: FSMContext):
 
     parts = txt.split()
     if len(parts) < 2:
-        await message.answer('Формат: <название или product_id> <вес_в_гр>')
+        await message.answer('Формат: <название или product_id> <вес_в_г>')
         return
     q = ' '.join(parts[:-1])
     try:
